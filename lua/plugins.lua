@@ -57,8 +57,10 @@ return packer.startup(function(use)
 	-- Identation
 	use { "lukas-reineke/indent-blankline.nvim" }
 
-
-
+	-- LSP support
+	use { "neovim/nvim-lspconfig" }
+	use { "williamboman/mason.nvim" }
+	use { "williamboman/mason-lspconfig.nvim" }
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
