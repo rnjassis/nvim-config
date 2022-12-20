@@ -21,4 +21,12 @@ require("settings.lsp_support")
 
 vim.opt.relativenumber = true
 vim.opt.number = true
-map('<leader>cfg', ':e /home/silva/.config/nvim/init.lua <CR>')
+vim.opt.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
+
+-- shortcut to this config file
+map('<leader>cfg', ':e ~/.config/nvim/init.lua <CR>')
+-- yank search: first yank, then use this command
+map('<leader>ys', '/<C-S-r>"<CR>')
