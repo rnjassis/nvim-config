@@ -57,6 +57,9 @@ return packer.startup(function(use)
 	-- Identation
 	use { "lukas-reineke/indent-blankline.nvim" }
 
+    -- Treesitter
+    use { "nvim-treesitter/nvim-treesitter", use = ":TSUpdate"}
+
 	-- LSP support
 	use { "neovim/nvim-lspconfig" }
 	use { "williamboman/mason.nvim" }
