@@ -16,6 +16,7 @@ require("settings.nvimtree")
 require("settings.blankline")
 require("settings.lualine")
 require("settings.lsp_support")
+require("settings.colorizer")
 
 --------------- GENERAL CONFIGS ---------------
 
@@ -37,4 +38,3 @@ map('<leader>cfg', ':e ~/.config/nvim/init.lua <CR>')
 map('<leader>ys', '/<C-S-r>"<CR>')
 -- avoid losing the top register to the replaced word
 vim.keymap.set("x", "<leader>v", "\"_dP")
-
