@@ -1,6 +1,6 @@
 require("mason").setup()
 require("mason-lspconfig").setup({
-    ensure_installed = { "sumneko_lua", "tsserver", "html" }
+    ensure_installed = { "lua_ls", "tsserver", "html", "pyright" }
 })
 
 local cmp = require'cmp'
@@ -55,7 +55,7 @@ require('lspconfig').html.setup {
     opts = opts
 }
 
-require("lspconfig").sumneko_lua.setup {
+require("lspconfig").lua_ls.setup {
     on_attach = on_attach,
     capabilities = capabilities,
     opts = opts
@@ -66,3 +66,10 @@ require("lspconfig").tsserver.setup {
     capabilities = capabilities,
     opts = opts
 }
+
+require("lspconfig").pyright.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    opts = opts
+}
+
