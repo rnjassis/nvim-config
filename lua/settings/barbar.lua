@@ -2,7 +2,7 @@ local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
 require ("bufferline").setup {
-	icons = "both"
+	icons = { buffer_index = true, filetype = { enabled = true } }
 }
 
 map('n', '<leader>1', '<Cmd>BufferGoto 1<CR>', opts)

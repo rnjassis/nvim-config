@@ -1,4 +1,5 @@
 require("mason").setup()
+-- Required: npm and python
 require("mason-lspconfig").setup({
     ensure_installed = { "lua_ls", "tsserver", "html", "pyright" }
 })
