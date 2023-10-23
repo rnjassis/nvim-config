@@ -72,7 +72,8 @@ return packer.startup(function(use)
     use { "saadparwaiz1/cmp_luasnip" }
     use { "hrsh7th/cmp-buffer" }
     use { "hrsh7th/nvim-cmp" }
-    use { "onsails/lspkind.nvim"}
+    use { "onsails/lspkind.nvim" }
+    use { "ray-x/lsp_signature.nvim" }
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

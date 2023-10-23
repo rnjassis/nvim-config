@@ -4,6 +4,8 @@ require("mason-lspconfig").setup({
     ensure_installed = { "lua_ls", "tsserver", "html", "pyright" }
 })
 
+require("lsp_signature").setup()
+
 local cmp = require'cmp'
 
 cmp.setup({
