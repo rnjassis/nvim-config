@@ -3,16 +3,13 @@ require("mason").setup()
 require("mason-lspconfig").setup({
     ensure_installed = { "lua_ls", "tsserver", "html", "pyright" }
 })
-
 require("lsp_signature").setup({
     bind = true,
     handler_opts = {
         border = "rounded"
     }
 })
-
 local cmp = require'cmp'
-
 cmp.setup({
     snippet = {
         expand = function(args)
@@ -31,7 +28,17 @@ cmp.setup({
         ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     }),
     sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
+        -- ignore 'code completion' for plain text
+        { name = 'nvim_lsp',
+            entry_filter = function(entry,ctx)
+                local kind = cmp.lsp.CompletionItemKind[entry:get_kind()]
+                if kind == "Text" then
+                    return false
+                else
+                    return true
+                end
+            end
+        },
         { name = 'luasnip' }, -- For luasnip users.
     }, {
         { name = 'buffer' },
