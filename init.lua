@@ -38,3 +38,10 @@ map('<leader>cfg', ':e ~/.config/nvim/init.lua <CR>')
 map('<leader>ys', '/<C-S-r>"<CR>')
 -- avoid losing the top register to the replaced word
 vim.keymap.set("x", "<leader>v", "\"_dP")
+-- notes folder
+map('<leader>nts', ':e ~/Nextcloud/Notes <CR>')
+-- vert split
+map('<leader>vs', ':vert split<CR>')
+-- restart LSP
+map('<leader>lsp', ':LspRestart<CR>')
+
