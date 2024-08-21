@@ -52,39 +52,65 @@ cmp.setup({
     }
 })
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-local opts = { noremap = true, silent = true }
-local on_attach = function(client, bufnr)
-    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, {})
-    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {})
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem = {
+    documentationFormat = { "markdown", "plaintext" },
+    snippetSupport = true,
+    preselectSupport = true,
+    insertReplaceSupport = true,
+    labelDetailsSupport = true,
+    deprecatedSupport = true,
+    commitCharactersSupport = true,
+    tagSupport = { valueSet = { 1 } },
+    resolveSupport = {
+        properties = {
+        "documentation",
+        "detail",
+        "additionalTextEdits",
+        },
+    },
+}
+--local opts = { noremap = true, silent = true }
+local util = require "lspconfig/util"
+local on_attach = function(_, bufnr)
+    local function opts(desc)
+        return { noremap = true, buffer=bufnr, desc="LSP " .. desc }
+    end
+    vim.keymap.set('n', '<leader>gD', vim.lsp.buf.declaration, opts "Declaration")
+    vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition, opts "Definition")
+    vim.keymap.set('n', '<leader>gi', vim.lsp.buf.implementation, opts "Implementation")
 
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, {})
-    vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, {})
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
+    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts "abc")
+    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts "abc")
+
+    vim.keymap.set('n', '<leader>gr', require('telescope.builtin').lsp_references, opts "abc")
+    vim.keymap.set('n', '<leader>H', vim.lsp.buf.hover, opts "abc")
 end
 
 require('lspconfig').html.setup {
     on_attach = on_attach,
     capabilities = capabilities,
-    opts = opts
 }
 
 require("lspconfig").lua_ls.setup {
     on_attach = on_attach,
     capabilities = capabilities,
-    opts = opts
 }
 
 require("lspconfig").tsserver.setup {
     on_attach = on_attach,
     capabilities = capabilities,
-    opts = opts
 }
 
 require("lspconfig").pyright.setup {
     on_attach = on_attach,
     capabilities = capabilities,
-    opts = opts
+    root_dir = util.root_pattern("__main__.py", ".git"),
+    settings = {
+        pyright = {
+            completeUnimported = true,
+            usePlaceholders = true,
+        }
+    }
 }
 

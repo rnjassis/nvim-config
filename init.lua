@@ -45,6 +45,6 @@ map('<leader>vs', ':vert split<CR>')
 -- restart LSP
 map('<leader>lsp', ':LspRestart<CR>')
 -- quit, save, write and quit
-map('<leader>qq', ':q<CR>')
+map('<leader>qq', ':q!<CR>')
 map('<leader>ww', ':w<CR>')
 map('<leader>wq', ':wq<CR>')
