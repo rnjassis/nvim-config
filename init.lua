@@ -17,10 +17,10 @@ require("settings.blankline")
 require("settings.lualine")
 require("settings.lsp_support")
 require("settings.colorizer")
+require("settings.harpoon")
 
 --------------- GENERAL CONFIGS ---------------
 
-vim.opt.relativenumber = true
 vim.opt.number = true
 -- 4 spaces when press tabj
 vim.opt.expandtab = true
@@ -44,4 +44,7 @@ map('<leader>nts', ':e ~/Nextcloud/Notes <CR>')
 map('<leader>vs', ':vert split<CR>')
 -- restart LSP
 map('<leader>lsp', ':LspRestart<CR>')
-
+-- quit, save, write and quit
+map('<leader>qq', ':q<CR>')
+map('<leader>ww', ':w<CR>')
+map('<leader>wq', ':wq<CR>')

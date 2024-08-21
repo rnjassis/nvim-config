@@ -54,7 +54,7 @@ cmp.setup({
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local opts = { noremap = true, silent = true }
-local on_attach = function(_, _)
+local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, {})
     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {})
 
