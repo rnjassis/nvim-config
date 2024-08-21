@@ -22,6 +22,7 @@ require("settings.harpoon")
 --------------- GENERAL CONFIGS ---------------
 
 vim.opt.number = true
+vim.opt.relativenumber = true
 -- 4 spaces when press tabj
 vim.opt.expandtab = true
 vim.opt.tabstop = 4

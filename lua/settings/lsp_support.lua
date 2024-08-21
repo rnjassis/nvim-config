@@ -1,7 +1,7 @@
 require("mason").setup()
 -- Required: npm and python
 require("mason-lspconfig").setup({
-    ensure_installed = { "lua_ls", "tsserver", "html", "pyright" }
+    ensure_installed = { "lua_ls", "tsserver", "html", "pyright", "gopls" }
 })
 require("lsp_signature").setup({
     bind = true,
@@ -70,7 +70,7 @@ capabilities.textDocument.completion.completionItem = {
         },
     },
 }
---local opts = { noremap = true, silent = true }
+
 local util = require "lspconfig/util"
 local on_attach = function(_, bufnr)
     local function opts(desc)
@@ -106,6 +106,18 @@ require("lspconfig").pyright.setup {
     on_attach = on_attach,
     capabilities = capabilities,
     root_dir = util.root_pattern("__main__.py", ".git"),
+    settings = {
+        pyright = {
+            completeUnimported = true,
+            usePlaceholders = true,
+        }
+    }
+}
+
+require("lspconfig").gopls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    root_dir = util.root_pattern("go.work", "go.mod", ".git"),
     settings = {
         pyright = {
             completeUnimported = true,
