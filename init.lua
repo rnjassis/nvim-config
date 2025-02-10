@@ -49,3 +49,9 @@ map('<leader>lsp', ':LspRestart<CR>')
 map('<leader>qq', ':q!<CR>')
 map('<leader>ww', ':w<CR>')
 map('<leader>wq', ':wq<CR>')
+
+-- switch between tmux panels
+map('<C-h>', '<cmd> TmuxNavigateLeft<CR>')
+map('<C-l>', '<cmd> TmuxNavigateRight<CR>')
+map('<C-k>', '<cmd> TmuxNavigateUp<CR>')
+map('<C-j>', '<cmd> TmuxNavigateDown<CR>')

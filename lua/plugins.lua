@@ -78,6 +78,9 @@ return packer.startup(function(use)
     -- Harpoon
     use { "ThePrimeagen/harpoon",branch = "harpoon2",requires = { {"nvim-lua/plenary.nvim"} } }
 
+    -- Tmux integration
+    use {"christoomey/vim-tmux-navigator", lazy = "false"}
+
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
 	if PACKER_BOOTSTRAP then

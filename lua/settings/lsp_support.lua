@@ -1,7 +1,7 @@
 require("mason").setup()
 -- Required: npm and python
 require("mason-lspconfig").setup({
-    ensure_installed = { "lua_ls", "tsserver", "html", "pyright", "gopls" }
+    ensure_installed = { "lua_ls", "ts_ls", "html", "pyright", "gopls" }
 })
 require("lsp_signature").setup({
     bind = true,
@@ -97,7 +97,7 @@ require("lspconfig").lua_ls.setup {
     capabilities = capabilities,
 }
 
-require("lspconfig").tsserver.setup {
+require("lspconfig").ts_ls.setup {
     on_attach = on_attach,
     capabilities = capabilities,
 }
