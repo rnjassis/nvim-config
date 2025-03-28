@@ -24,4 +24,8 @@ map('<C-k>', '<cmd> TmuxNavigateUp<CR>')
 map('<C-j>', '<cmd> TmuxNavigateDown<CR>')
 
 
+-- Start flash.nvim search
 vim.keymap.set("n", "<leader>fj", function() require("flash").jump() end)
+
+-- Show undo tree
+vim.keymap.set('n', '<leader>ut', vim.cmd.UndotreeToggle)

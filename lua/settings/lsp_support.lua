@@ -1,5 +1,6 @@
 require("mason").setup()
 -- Required: npm and python
+
 require("mason-lspconfig").setup({
     ensure_installed = { "lua_ls", "ts_ls", "html", "pyright", "gopls" }
 })
@@ -80,11 +81,11 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition, opts "Definition")
     vim.keymap.set('n', '<leader>gi', vim.lsp.buf.implementation, opts "Implementation")
 
-    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts "abc")
-    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts "abc")
+    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts "Rename")
+    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts "Code Action")
 
-    vim.keymap.set('n', '<leader>gr', require('telescope.builtin').lsp_references, opts "abc")
-    vim.keymap.set('n', '<leader>H', vim.lsp.buf.hover, opts "abc")
+    vim.keymap.set('n', '<leader>gr', require('telescope.builtin').lsp_references, opts "References")
+    vim.keymap.set('n', '<leader>H', vim.lsp.buf.hover, opts "Hover")
 end
 
 require('lspconfig').html.setup {

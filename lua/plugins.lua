@@ -63,6 +63,9 @@ return packer.startup(function(use)
     -- Recognize colors
     use { "norcalli/nvim-colorizer.lua" }
 
+    -- Undo Tree
+    use { "mbbill/undotree" }
+
 	-- LSP support
 	use { "williamboman/mason.nvim" }
 	use { "williamboman/mason-lspconfig.nvim" }
