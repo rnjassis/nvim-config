@@ -76,7 +76,10 @@ return packer.startup(function(use)
     use { "ray-x/lsp_signature.nvim" }
 
     -- Harpoon
-    use { "ThePrimeagen/harpoon",branch = "harpoon2",requires = { {"nvim-lua/plenary.nvim"} } }
+    use { "ThePrimeagen/harpoon", branch = "harpoon2", requires = { {"nvim-lua/plenary.nvim"} } }
+
+    -- Fast 'f' 'F' 't' 'T' search
+    use { "folke/flash.nvim" }
 
     -- Tmux integration
     use {"christoomey/vim-tmux-navigator", lazy = "false"}
