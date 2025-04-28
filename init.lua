@@ -20,4 +20,5 @@ require("settings.colorizer")
 require("settings.harpoon")
 require("settings.general")
 require("settings.mappings")
+require("settings.snippets")
 
