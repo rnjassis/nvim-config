@@ -1,95 +1,72 @@
--- reference https://github.com/wbthomason/packer.nvim
--- :PackerSync
-
-local fn = vim.fn
-
--- Automatically install packer
-local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd [[packadd packer.nvim]]
-    return true
-  end
-  return false
+-- Ensure lazy.nvim is installed
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
 end
-local packer_bootstrap = ensure_packer()
+vim.opt.rtp:prepend(lazypath)
 
--- "Requiring a nonexistent module or a module which contains syntax errors aborts the currently executing script.
--- pcall() may be used to prevent errors."
-local ok, packer = pcall(require, "packer")
-if not ok then
-	return
-end
+require("lazy").setup({
+  -- File searching
+  { "nvim-lua/plenary.nvim" },
+  { "nvim-telescope/telescope.nvim" },
 
-packer.init {
-  display = {
-    open_fn = function()
-      return require("packer.util").float { border = "rounded" }
-    end,
+  -- Color scheme
+  { "catppuccin/nvim", name = "catppuccin" },
+
+  -- Tabs
+  { "nvim-tree/nvim-web-devicons" },
+  { "romgrk/barbar.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
+
+  -- Tree
+  { "nvim-tree/nvim-tree.lua", dependencies = { "nvim-tree/nvim-web-devicons" } },
+
+  -- Status line
+  { "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
+
+  -- Indentation guides
+  { "lukas-reineke/indent-blankline.nvim" },
+
+  -- Treesitter
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
   },
-  git = {
-    clone_timeout = 300, -- Timeout, in seconds, for git clones
-  },
-}
 
--- Plugins
-return packer.startup(function(use)
-	-- File searching
-	use { "nvim-lua/plenary.nvim"}
-	use { "nvim-telescope/telescope.nvim"}
-	
-	-- Color scheme
-	-- use { "ellisonleao/gruvbox.nvim" }
-	use { "catppuccin/nvim", as = "catppuccin" }
+  -- Color previews
+  { "norcalli/nvim-colorizer.lua" },
 
-	-- Tabs
-	use { "nvim-tree/nvim-web-devicons" }
-	use {'romgrk/barbar.nvim', wants = 'nvim-web-devicons'}
-
-	-- Tree
-	use { "nvim-tree/nvim-tree.lua", requires = { "nvim-tree/nvim-web-devicons" } }
-
-	-- Statusbar
-	use { "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } }
-
-	-- Identation
-	use { "lukas-reineke/indent-blankline.nvim" }
-
-    -- Treesitter
-    use { "nvim-treesitter/nvim-treesitter", use = ":TSUpdate"}
-
-    -- Recognize colors
-    use { "norcalli/nvim-colorizer.lua" }
+  -- Undo tree
+  { "mbbill/undotree" },
 
     -- Undo Tree
-    use { "mbbill/undotree" }
+  { "mbbill/undotree" },
 
-	-- LSP support
-	use { "williamboman/mason.nvim" }
-	use { "williamboman/mason-lspconfig.nvim" }
-	use { "neovim/nvim-lspconfig" }
-    use { "hrsh7th/cmp-nvim-lsp" }
-    use { 'L3MON4D3/LuaSnip' }
-    use { "saadparwaiz1/cmp_luasnip" }
-    use { "hrsh7th/cmp-buffer" }
-    use { "hrsh7th/nvim-cmp" }
-    use { "onsails/lspkind.nvim" }
-    use { "ray-x/lsp_signature.nvim" }
+  -- LSP support
+  { "williamboman/mason.nvim" },
+  { "williamboman/mason-lspconfig.nvim" },
+  { "neovim/nvim-lspconfig" },
+  { "hrsh7th/cmp-nvim-lsp" },
+  { "L3MON4D3/LuaSnip" },
+  { "saadparwaiz1/cmp_luasnip" },
+  { "hrsh7th/cmp-buffer" },
+  { "hrsh7th/nvim-cmp" },
+  { "onsails/lspkind.nvim" },
+  { "ray-x/lsp_signature.nvim" },
 
-    -- Harpoon
-    use { "ThePrimeagen/harpoon", branch = "harpoon2", requires = { {"nvim-lua/plenary.nvim"} } }
+  -- Harpoon
+  { "ThePrimeagen/harpoon", branch = "harpoon2", dependencies = { "nvim-lua/plenary.nvim" } },
 
-    -- Fast 'f' 'F' 't' 'T' search
-    use { "folke/flash.nvim" }
+  -- Fast f/F/t/T search
+  { "folke/flash.nvim" },
 
-    -- Tmux integration
-    use {"christoomey/vim-tmux-navigator", lazy = "false"}
+  -- Tmux integration (always loaded)
+  { "christoomey/vim-tmux-navigator", lazy = false },
+})
 
-	-- Automatically set up your configuration after cloning packer.nvim
-	-- Put this at the end after all plugins
-	if PACKER_BOOTSTRAP then
-    		require("packer").sync()
-	end
-end)
