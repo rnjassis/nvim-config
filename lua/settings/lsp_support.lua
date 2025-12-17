@@ -88,22 +88,16 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', '<leader>H', vim.lsp.buf.hover, opts "Hover")
 end
 
-require('lspconfig').html.setup {
+local common = {
     on_attach = on_attach,
     capabilities = capabilities,
 }
 
-require("lspconfig").lua_ls.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-}
+vim.lsp.config('html', common)
+vim.lsp.config('lua_ls', common)
+vim.lsp.config('ts_ls', common)
 
-require("lspconfig").ts_ls.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-}
-
-require("lspconfig").pyright.setup {
+vim.lsp.config('pyright', {
     on_attach = on_attach,
     capabilities = capabilities,
     root_dir = util.root_pattern("__main__.py", ".git"),
@@ -113,9 +107,9 @@ require("lspconfig").pyright.setup {
             usePlaceholders = true,
         }
     }
-}
+})
 
-require("lspconfig").gopls.setup {
+vim.lsp.config('gopls', {
     on_attach = on_attach,
     capabilities = capabilities,
     root_dir = util.root_pattern("go.work", "go.mod", ".git"),
@@ -125,5 +119,5 @@ require("lspconfig").gopls.setup {
             usePlaceholders = true,
         }
     }
-}
+})
 

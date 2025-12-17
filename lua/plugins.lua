@@ -68,5 +68,8 @@ require("lazy").setup({
 
   -- Tmux integration (always loaded)
   { "christoomey/vim-tmux-navigator", lazy = false },
+
+  -- Show Absolute and Relative numbers
+  { "shrynx/line-numbers.nvim", opts = {}, }
 })
 
