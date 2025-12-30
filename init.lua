@@ -21,4 +21,5 @@ require("settings.harpoon")
 require("settings.general")
 require("settings.mappings")
 require("settings.snippets")
+require("settings.comfy-line-numbers")
 
